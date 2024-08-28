@@ -1,3 +1,3 @@
 # Antier
 <br>
-Auther: Sahil Patyal
+Author: Sahil Patyal
