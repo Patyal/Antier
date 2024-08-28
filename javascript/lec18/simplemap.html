@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map FROM and To</title>
+    <style>
+        #map{
+            width: 100%;
+            height: 700px;
+            background-color: gray;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="map"></div>
+    
+</body>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnBEPybDmbSPVm1biiwGyT5hsJm49Spdg&libraries=&callback=initMap" async defer></script>
+
+<script>
+     function initMap() {
+
+        const location1 = { lat: 34.0837, lng: 74.7973 }; 
+        const location2 = {lat:22.2442, lng: 68.9685 };
+        const location3 = { lat: 8.0844, lng: 77.5495 }; 
+        const location4 = {lat: 23.8315, lng: 91.2868};
+
+
+        const map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 6,
+          center: location1,
+        });
+
+        // Add markers for the locations
+        new google.maps.Marker({
+          position: location1,
+          map: map,
+          title: 'Delhi',
+        });
+
+        new google.maps.Marker({
+          position: location2,
+          map: map,
+          title: 'Mumabi',
+        });
+
+        new google.maps.Marker({
+            position:location3,
+            map:map,
+            title: 'kanyakumari',
+        });
+
+        new google.maps.Marker({
+            position:location4,
+            map:map,
+            title:'agartla',
+        })
+
+        // Define the line coordinates
+        const lineCoordinates = [
+          location1,
+          location2,
+          location3,
+          location4,
+          location1
+        ];
+
+        // Create the polyline (line) and set its options
+        const line = new google.maps.Polyline({
+          path: lineCoordinates,
+          geodesic: true,
+          strokeColor: '#FF0000',
+          strokeOpacity: 1.0,
+          strokeWeight: 2,
+        });
+
+        // Add the line to the map
+        line.setMap(map);
+      }
+</script>
+</html>

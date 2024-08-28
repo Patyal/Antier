@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Information</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        input[type=text]{
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+        input[type=button]{
+            background-color: #04AA6D;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        input[type=button]:hover {
+            background-color: #45a049;
+        }
+
+        .container{
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .employee{
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .employee td, .employee th{
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .employee tr:nth-child(even){background-color: #f2f2f2;}
+        .employee tr:hover{
+            background-color: #ddd;
+        }
+
+        .employee th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name">
+            
+            <label for="post">Post:</label>
+            <input type="text" name="post" id="post">
+
+            <label for="sal">Salary:</label>
+            <input type="text" name="sal" id="sal">
+
+            <input type="button" name="save" id="save" value="Save" onclick="save_btn()">
+            <input type="button" name="print" id="print" value="Print" onclick="print_btn()">
+            <input type="button" name="find" id="find" value="Find">
+            <input type="button" name="max" id="max" value="Max">
+        </form>
+    </div>
+    <div class="show_table">
+
+        <table class="employee" id="employee">
+            <thead>
+                <th>Name</th>
+                <th>Post</th>
+                <th>Salary</th>
+            </thead>
+            <tbody>
+                <tr id="table_h3"> <td colspan="3"><h3>No Data Found!</h3></td></tr>
+            </tbody>
+        </table>
+
+    </div>
+</body>
+<script>
+
+    var nameArr = [];
+    var postArr = [];
+    var salArr = [];
+ 
+
+    function save_btn(){
+        var new_val = document.getElementById('name').value;
+        nameArr.push(new_val); 
+        console.log(nameArr);
+
+        var new_post = document.getElementById('post').value;
+        postArr.push(new_post);
+        console.log(postArr); 
+
+        var new_sal = document.getElementById('sal').value;
+         salArr.push(new_sal);
+         console.log(salArr);
+
+         document.getElementById('name').value = '';
+         document.getElementById('post').value = '';
+         document.getElementById('sal').value = '';
+         document.getElementById("name").focus();
+    }
+
+    var x = 0;
+
+    function print_btn(){ 
+    
+        for(var i = x; i<nameArr.length; i++)
+        {
+            console.log(i);
+            document.querySelector('.employee tbody').innerHTML += `<tr><td>${nameArr[i]}</td><td>${postArr[i]}</td><td>${salArr[i]} Rs</td></td>`;
+            x++;
+            document.getElementById("table_h3").style.display = "none"; 
+            document.getElementById("name").focus();
+            
+        }
+           
+    } 
+
+</script>
+</html>

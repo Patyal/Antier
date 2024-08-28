@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Data</title>
+    <style>
+        thead th{
+            background-color: lightgray;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Product Data</h1>
+    <select name="num" id="num" onchange="fun1()">
+        <option value="sel">Select</option>
+        <option value="one">1</option>
+        <option value="two">2</option>
+        <option value="three">3</option>
+        <option value="four">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+    </select>
+    <table border="1px" id="myTable">
+        <thead >
+            <th>ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Discount Percentage</th>
+            <th>Rating</th>
+            <th>Stock</th>
+            <th>Brand</th>
+            <th>Category</th>
+        </thead>
+        <tbody id="prodtable">
+
+        </tbody>
+    </table>
+
+</body>
+<script>
+    var x=1;
+    //   document.getElementById("myTable").deleteRow(0);       
+    function fun1(){
+         
+        const tbody = document.getElementById('prodtable');
+        const row = document.createElement('tr');
+        fetch('https://dummyjson.com/products/'+num.selectedIndex)
+        .then(response => response.json())
+        .then(data => {
+            
+            row.innerHTML = `<td> ${data.id} </td> <td> ${data.title}</td>
+            <td>${data.description}</td>
+            <td>${data.price}</td>
+            <td>${data.discountPercentage}</td>
+            <td>${data.rating}</td>
+            <td>${data.stock}</td>
+            <td>${data.brand}</td>
+            <td>${data.category.toUpperCase()}</td>`;
+                tbody.appendChild(row);
+                })
+        x++;
+        console.log(x);
+        if(x>1){
+            document.getElementById("myTable").deleteRow(1); 
+            }
+            }
+   
+</script>
+</html>

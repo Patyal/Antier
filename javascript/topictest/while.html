@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>While Loop</title>
+</head>
+<body>
+
+    <div>
+        <h2>While loop from 1 to 20 but must be Exit after 13</h2>
+        <h2 id="loopbreak"></h2>
+    </div>
+    
+</body>
+<script>
+    var i = 0;
+    var res =[];
+    while(i<=20){
+        console.log(i);
+        if(i==13){
+            break;
+        }
+        
+        i++;
+        res += i+`<br>`;
+        document.getElementById('loopbreak').innerHTML = res;
+    }
+</script>
+</html>

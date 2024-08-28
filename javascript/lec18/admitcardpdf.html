@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admit Card</title>
+    <style>
+        *{
+        box-sizing: border-box;
+    }
+
+    input[type=text], input[type=date] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        resize: vertical;
+    }
+
+    input[type=button]{
+        background-color: #04AA6D;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        cursor: pointer;
+    }
+
+    input[type=button]:hover {
+            background-color: #45a049;
+    }
+
+    .main{
+        background-color: #f2f2f2;
+        padding: 20px;
+        width: 60%;
+        margin: auto;
+    }
+
+    h1{
+        text-align: center;
+        color: green;
+    }
+
+
+    </style>
+</head>
+<body>
+    <div class="main">
+
+    
+        <form action="">
+            <h1>SSC Admit Card</h1>
+            <label for="rno">Roll No:</label>
+            <input type="text" id="rno">
+
+            <label for="pass_exam">Password for Examnation:</label>
+            <input type="text" id="pass_exam">
+
+            <label for="tic_No">Ticket No:</label>
+            <input type="text" id="tic_No">
+
+            <label for="exam_d">Exam Date:</label>
+            <input type="text" id="exam_d">
+
+            <label for="rep_time">Reporting Time:</label>
+            <input type="text" id="rep_time">
+
+            <label for="ent_close_t">Entry Closing Time:</label>
+            <input type="text" id="ent_close_t">
+
+            <label for="appli_name">Applicat's Name:</label>
+            <input type="text" id="appli_name">
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob">
+
+            <label for="gen">Gender:</label>
+            <input type="text" id="gen">
+
+            <label for="cat">Category:</label>
+            <input type="text" id="cat">
+
+            <label for="addre">Address:</label>
+            <input type="text" id="addre">
+
+            <label for="doe">Duration of Exam:</label>
+            <input type="date" id="doe">
+
+            <input type="button" value="Submit" onclick="print_pdf()">
+
+        </form>
+    </div>
+</body>
+<script>
+    function print_pdf(){
+        console.log('button is clicked');
+    }
+</script>
+</html>

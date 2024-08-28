@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main{
+                /* height: 100%; */
+                width: 100%;
+                height: 100px;
+
+        }
+        #map-canvas{
+            width: 100%;
+            height: 600px;
+            background-color: gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <form action="">
+            <input type="text" id="orign" placeholder="To" value="Delhi">
+            <input type="text" id="destn" placeholder="From" value="Mumbai">
+            <div id="total"></div>
+            <br>
+            <div id="map-canvas"></div>
+        </form>
+    </div>
+    <!-- <div id="gmap"></div> -->
+    
+
+    
+</body>
+<!-- <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpS-QgEZO_1FuWt16du-7WKrIcn_6OIJE&callback=initMap">
+    </script> -->
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnBEPybDmbSPVm1biiwGyT5hsJm49Spdg&libraries=&callback=initMap" async defer></script>
+
+
+<script>
+  function initMap() {
+  var map = new google.maps.Map(document.getElementById('map-canvas'), {
+    center: { lat: 30.3398, lng:76.3869 },
+    zoom: 20
+  });
+
+  var marker = new google.maps.Marker({
+    map: map,
+    draggable: false
+  });
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      map.setCenter(initialLocation);
+      // Optionally, you can place a marker at the user's location:
+      // marker.setPosition(initialLocation);
+    });
+  }
+
+  // Initialize AutocompleteDirectionsHandler after map is initialized
+  new AutocompleteDirectionsHandler(map);
+}
+
+function AutocompleteDirectionsHandler(map) {
+  this.map = map;
+  this.originPlaceId = null;
+  this.destinationPlaceId = null;
+  this.travelMode = 'DRIVING';
+  this.directionsService = new google.maps.DirectionsService();
+  this.directionsRenderer = new google.maps.DirectionsRenderer();
+  this.directionsRenderer.setMap(map);
+
+  var originInput = document.getElementById('orign');
+  var destinationInput = document.getElementById('destn');
+
+  var originAutocomplete = new google.maps.places.Autocomplete(originInput);
+  var destinationAutocomplete = new google.maps.places.Autocomplete(destinationInput);
+
+  originAutocomplete.bindTo('bounds', map);
+  destinationAutocomplete.bindTo('bounds', map);
+
+  this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
+  this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
+}
+
+AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
+  var me = this;
+  autocomplete.addListener('place_changed', function() {
+    var place = autocomplete.getPlace();
+
+    if (!place.place_id) {
+      window.alert('Please select an option from the dropdown list.');
+      return;
+    }
+
+    if (mode === 'ORIG') {
+      me.originPlaceId = place.place_id;
+    } else {
+      me.destinationPlaceId = place.place_id;
+    }
+    me.route();
+  });
+};
+
+AutocompleteDirectionsHandler.prototype.route = function() {
+  if (!this.originPlaceId || !this.destinationPlaceId) {
+    return;
+  }
+  var me = this;
+
+  this.directionsService.route({
+    origin: { 'placeId': this.originPlaceId },
+    destination: { 'placeId': this.destinationPlaceId },
+    travelMode: this.travelMode
+  }, function(response, status) {
+    if (status === 'OK') {
+      me.directionsRenderer.setDirections(response);
+      computeTotalDistance(response);
+    } else {
+      window.alert('Directions request failed due to ' + status);
+    }
+  });
+};
+
+function computeTotalDistance(result) {
+  var totalDist = 0;
+  var totalTime = 0;
+  var myroute = result.routes[0];
+
+  for (var i = 0; i < myroute.legs.length; i++) {
+    totalDist += myroute.legs[i].distance.value;
+    totalTime += myroute.legs[i].duration.value;
+  }
+
+  totalDist = totalDist / 1000; // convert to kilometers
+  var totalDistText = "Total distance is: " + totalDist.toFixed(2) + " km<br>";
+  var totalTimeText = "Total time is: " + (totalTime / 60).toFixed(2) + " minutes";
+  
+  document.getElementById("total").innerHTML = totalDistText + totalTimeText;
+}
+
+
+
+    
+
+
+    
+
+</script>
+</html>

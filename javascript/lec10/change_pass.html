@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        h1{
+            color: green;
+            text-align: center;
+        }
+
+        .main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        form{
+            background-color: #f2f2f2;
+            width: 60%;
+            padding: 40px;
+        }
+
+        input[type=password]{
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+
+        label{
+            color: green;
+        }
+
+        input[type = button]{
+            background-color: #ff5733;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="main">
+        <form action="">
+            <h1>Change Password</h1>
+            <label for="old_pass">Enter Old Password</label>
+            <input type="password" id="old_pass" name="old_pass">
+            <div class="errors">
+                <p></p>
+            </div>
+
+            <label for="new_pass">Enter New Password</label>
+            <input type="password" id="new_pass" name="new_pass">
+            <div class="errors">
+                <p></p>
+            </div>
+
+            <label for="re_type">Retype Password</label>
+            <input type="password" id="re_type" name="re_type">
+            <div class="errors">
+                <p></p>
+            </div>
+
+            <input type="button" value="OK">
+        </form>
+    </div>
+        
+    
+</body>
+<script>
+    
+</script>
+</html>

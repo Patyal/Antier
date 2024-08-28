@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Table</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+</head>
+<body>
+
+    <div>
+        <table id="example" class="display" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>City</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+<script>
+    $(document).ready(function () {
+        var JsonData = [
+            {
+                "name": 'jhon',
+                "email": 'me@gmail.com',
+                "city": 'OneCity'
+            },
+            {
+                "name": 'Mohan',
+                "email": 'mohan@gmail.com',
+                "city": 'Shimla'
+            },
+            {
+                "name": 'Vikram',
+                "email": 'vikram@gmail.com',
+                "city": 'Ganganagar'
+            },
+            {
+                "name": 'Sohan',
+                "email": 'sohan@gmail.com',
+                "city": 'Mewar'
+            },
+            {
+                "name": 'Sonali',
+                "email": 'Sonali@gmail.com',
+                "city": 'Ptana'
+            },
+            {
+                "name": 'Ranjeet',
+                "email": 'ranjeet@gmail.com',
+                "city": 'Mewar'
+            },
+            {
+                "name": 'Anil',
+                "email": 'anil@gmail.com',
+                "city": 'Mewar'
+            },
+            {
+                "name": 'Mohit',
+                "email": 'mohit@gmail.com',
+                "city": 'Delhi'
+            },
+            {
+                "name": 'Tripti',
+                "email": 'tripti@gmail.com',
+                "city": 'Goa'
+            },
+            {
+                "name": 'Sohan',
+                "email": 'sohan@gmail.com',
+                "city": 'Mewar'
+            },
+            {
+                "name": 'Sohan',
+                "email": 'sohan@gmail.com',
+                "city": 'Mewar'
+            },
+            {
+                "name": 'Sohan',
+                "email": 'sohan@gmail.com',
+                "city": 'Mewar'
+            }
+        ]
+
+        $('#example').DataTable({
+            data: JsonData,
+            columns: [
+                {data: 'name'},
+                {data: 'email'},
+                {data: 'city'}
+            ]
+        })
+        
+    })
+</script>
+</html>

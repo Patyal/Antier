@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E_Shop PDF</title>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js" integrity="sha512-Z8CqofpIcnJN80feS2uccz+pXWgZzeKxDsDNMD/dJ6997/LSRY+W4NmEt9acwR+Gt9OHN0kkI1CTianCwoqcjQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js" integrity="sha512-2/YdOMV+YNpanLCF5MdQwaoFRVbTmrJ4u4EpqS/USXAQNUDgI5uwYi6J98WVtJKcfe1AbgerygzDFToxAlOGEQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .container{
+            border-radius: 5px;
+            background-color: #f2f2f2f2;
+            padding: 20px;
+        }
+        input[type=text], input[type=date] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 14px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+        }
+
+        input[type=button]{
+            background-color: #04AA6D;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="" id="my_form">
+            <label for="c_name">Customer Name</label>
+            <input type="text" id="c_name">
+
+            <label for="add_l1">Address </label>
+            <input type="text" id="add_l1">
+
+            <label for="curr_date">Date</label>
+            <input type="date" id="curr_date">
+
+            <label for="phone">Phone</label>
+            <input type="text" id="phone">
+
+            <label for="desc">Items</label>
+            <i class="fa fa-plus" id="des_plus" aria-hidden="true" onclick="add_des()"></i>
+            <input type="text" id="item_id" class="item">
+
+            <div id="text_add"></div>
+            
+
+
+            <label for="quat">Quantity</label>
+            <input type="text" id="quat">
+
+            <label for="rate">Rate</label>
+            <input type="text" id="rate">
+
+            <label for="sub_t">Subtotal</label>
+            <input type="text" id="sub_t">
+
+            <input type="button" id="btn1" value="Create PDF" >
+            <input type="button" value="Check" onclick="check()">
+
+        </form>
+    </div>
+</body>
+<script>
+
+    function add_des(){
+        // console.log('Plus icon is clicked');
+        var x = document.createElement("INPUT");
+        x.setAttribute("type", "text");
+        x.setAttribute('class', 'item');
+        document.getElementById('text_add').appendChild(x);
+    }
+    function check(){
+        // console.log('Button is clicked');
+        var item = document.querySelectorAll(".item");
+        let inc = 0;
+        item.forEach(element =>{
+            console.log(item[inc].value);
+            inc++;  
+        })
+        
+    }
+    document.getElementById('btn1').addEventListener('click', ()=>{
+        // console.log('button is clicked');
+        var c_name = document.getElementById('c_name').value;
+        // console.log(c_name);
+        var add_l1 = document.getElementById('add_l1').value;
+        var curr_date = document.getElementById('curr_date').value;
+        var phone = document.getElementById('phone').value;
+        // var desc = document.getElementById('desc').value;
+        var item = document.querySelectorAll(".item").value;
+        var quat = document.getElementById('quat').value;
+        var rate = document.getElementById('rate').value;
+        var sub_t = document.getElementById('sub_t').value;
+        var total = sub_t*1.18;
+        const {jsPDF} = window.jspdf;
+        const doc = new jsPDF();
+
+        doc.text(`Patyal and Groups`, 10,10);
+        doc.text(`Sector 119, SAS Nagar, Punjab, India`,10,20);
+        doc.text(`Tax invoice`, 140,10);
+        doc.text(`INVOICE NUMBER`, 140, 20);
+        doc.text(`${curr_date}`,140, 30);
+        doc.text(`G.NO: 3894328428934`,140,40);
+        doc.text(`Bill To:`,10,30);
+        doc.text(`Name: ${c_name}`,10,40);
+        doc.text(`Address: ${add_l1}`, 10,50);
+        doc.text(`Phone: ${phone}`,10,60);
+        doc.text(`Invoice Date ${curr_date}`,140,50);
+        doc.text(`Thanks you for your business`,10,110);
+        doc.text(`SubTotal: ${sub_t}`,140,100);
+        doc.text(`Tax Rate: 18%`,140,110);
+        doc.text(`Total: ${total}`, 140,120);
+        const img = new Image();
+        img.src= 'sunrise-2963030_640.jpg';
+        doc.addImage(img,'jpeg',110,10,20,20);
+        // for table
+        doc.autoTable({
+            styles: {theme:'grid'},
+            head:[['ID', 'Item', 'Quantity', 'Rate', 'Amount']],
+            margin: { top: 70 },
+            body:[['1',`${item}`,`${quat}`,`${rate}`,`${rate}`]]
+        });
+
+        doc.save('my_data pdf');
+
+    });
+</script>
+</html>

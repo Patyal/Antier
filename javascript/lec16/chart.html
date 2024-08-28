@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <style>
+        .first_div{
+            display: flex;
+            
+        }
+
+        #myChart{
+            margin-right: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="first_div">
+        <canvas id="myChart" style="width:100px; max-width:600px"></canvas>
+        <canvas id="myChart2" style="width: 100%; max-width: 600px;"></canvas>
+    </div>
+
+    <div class="second_div">
+        <canvas id="mychart3" style="width: 100px; max-width: 600px;"></canvas>
+    </div>
+    
+
+
+</body>
+<script>
+
+    var xaxis = ['India','USA', 'UK', 'Canada'];
+    var yaxis = [500,800,300,400];
+    var bcolor = ['red', 'green', 'blue', 'orange'];
+    new Chart('myChart',{
+        type: 'pie',
+        data: {
+            labels: xaxis,
+            datasets: [{
+            data: yaxis, backgroundColor:bcolor
+            }]
+        },
+        options: {
+            
+            title:{
+                display:true,
+                text: 'World Wide Population'
+            }
+        }
+             
+    });
+
+    var xValues = [50,60,70,80,90,100,110,120,130,140,150];
+    var yValues = [7,8,8,9,9,9,10,11,14,14,15];
+
+    new Chart('myChart2',{
+        type: 'line',
+        data: {
+            labels: xValues,
+            datasets:[{
+                data: yValues, backgroundColor:bcolor,
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(0,0,255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
+                lineTension: 0,
+            }]
+        },
+        options: {
+            legends:{display:false},
+            title:{
+                display: true,
+                text: 'Demo Graph'
+            },
+            scales:{
+                yAxes:[{ticks: {min: 4, max:16}}]
+            }
+        }
+    });
+
+    const xval = [100,200,300, 400, 500, 600, 700, 800, 900, 1000];
+
+    new Chart('mychart3',{
+        type: 'line',
+        data: {
+            labels: xval,
+            datasets:[{
+                
+                        data: [860,1140,1060,1070,1110,1330,2210,7830,2478],
+                        borderColor: 'red',
+                        fill:false
+                    },{
+                        data:[1600, 1700,1700,1900,2000,2700,4000,5000,6000,7000],
+                        borderColor: 'green',
+                        fill:false
+                    
+                    },
+                {
+                    data:[300, 700, 2000, 5000, 6000, 4000, 2000, 1000, 200, 100],
+                    borderColor:'blue',
+                    fill:false
+                }]
+        },
+        options: {
+            title: {
+            display: true,
+            text: "World Wide Wine Production 2018"
+        }
+    }
+        
+    })
+</script>
+</html>

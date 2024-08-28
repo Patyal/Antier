@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information</title>
+    <style>
+        .child_1, .child_user, .child_email, .child_address, .child_phone, .child_comp{
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        <h1>User Information</h1>
+        <div class="child_1">
+            <p class="name_get">Name:</p>
+            <p id="name_val"></p>
+            
+        </div>
+        <div class="child_user">
+            <p>Username:</p>
+            <p id="username_val"></p>
+        </div>
+        <div class="child_email">
+            <p>Email:</p>
+            <p id="email_val"></p>
+        </div>
+        <div class="child_address">
+            <p>Address:</p>
+            <p id="address_val"></p>
+        </div>
+        <div class="child_phone">
+            <p>Phone:</p>
+            <p id="phone_val"></p>
+        </div>
+        <div class="child_comp">
+            <p>Company Name:</p>
+            <p id="company_val"></p>
+        </div>
+
+        <input type="button" id="prev" value="Previous" onclick="funprev()">
+        <input type="button" id="Next" value="Next" onclick="funnext()">
+    </form>
+</body>
+
+<script>
+    var i =-1;
+    function funnext(){
+        // console.log('Next Button is clicked');
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then(data =>{
+            // console.log(data[0]);
+            i++;
+            document.getElementById('name_val').innerHTML = data[i].name;
+            document.getElementById('username_val').innerHTML = data[i].username;
+            document.getElementById('email_val').innerHTML = data[i].email;
+            document.getElementById('address_val').innerHTML = data[i].address.street +", "+ data[i].address.suite +", City: "+ data[i].address.city +", Zipcode: "+ data[i].address.zipcode ;
+            document.getElementById('phone_val').innerHTML = data[i].phone;
+            document.getElementById('company_val').innerHTML = data[i].company.name;
+            console.log(i);
+            
+        })
+        
+        
+        
+    }
+
+    function funprev(){
+        // console.log(i);
+
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then(data =>{
+            
+            // console.log(data[0]);
+            i--;
+            document.getElementById('name_val').innerHTML = data[i].name;
+            document.getElementById('username_val').innerHTML = data[i].username;
+            document.getElementById('email_val').innerHTML = data[i].email;
+            document.getElementById('address_val').innerHTML = data[i].address.street +", "+ data[i].address.suite +", City: "+ data[i].address.city +", Zipcode: "+ data[i].address.zipcode ;
+            document.getElementById('phone_val').innerHTML = data[i].phone;
+            document.getElementById('company_val').innerHTML = data[i].company.name;  
+            console.log(i);
+            
+            
+        })
+
+    }
+
+    
+</script>
+</html>

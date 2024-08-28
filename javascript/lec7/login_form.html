@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href=
+    "https://use.fontawesome.com/releases/v5.15.3/css/all.css">
+    <style>
+        body{
+            background-color: gray;
+        }
+            .parent{
+                margin: auto;
+
+                background-color: coral;
+                width: 50%;
+                height: 600px;
+                font-size: 25px;
+                padding: 20px;
+                border-radius: 10px;
+
+            }
+            .l_form{
+                text-align: center;
+            }
+            table{
+                width: 100%;
+                margin-top: 80px;
+            }
+            input{
+                padding: 10px;
+                width: 90%;
+                border-radius: 10px;
+                margin: 10px;
+                
+            }
+            #show_err{
+                
+                text-align: center;
+            }
+
+            tr > td{
+                text-align: center;
+            }
+
+            .inline{
+                display: inline-block;
+            }
+
+            #image{
+            margin-top: 10px;
+            /* box-shadow: 5px 5px 5px 5px gray; */
+            width: 80%;
+            padding: 20px;
+            font-weight: 400;
+            padding-bottom: 0px;
+            height: 60px;
+            user-select: none;
+            text-decoration: line-through;
+            font-size: italic;
+            border: red 2px solid;
+            margin-left: 10px;
+            background-color: white;
+        }
+        .fas{
+            position: absolute;
+            left: 43%;
+            top: 50%;
+        }
+    </style>
+</head>
+<body onload="generate()">
+    <div class="parent">
+        
+
+        
+            <form action="" id="form1">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td colspan="3"><h2 class="l_form">Login Form</h2></td>
+                        </tr>
+                        <tr>
+                            
+                            <td><label for="email" class="lab_cen" >Email:</label></td>
+                            <td><input type="email" name="email" id="email" required></td>
+                        </tr>
+                        <tr>
+                            <td ><label for="pass" class="lab_cen">Password:</label></td>
+                            <td><input type="password" name="pass" id="pass" required></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div id="user-input" class="inline" >
+                                    <input type="text" id="submit" placeholder="Captcha code">
+                                    <p id="key"></p>
+                                </div>
+                                <div class="inline" onclick="generate()">
+                                    <i class="fas fa-sync"></i>
+                               </div>
+                            </td>
+                            <td>
+                                <div id="image" class="inline" selectable = "False"></div>
+                            </td>
+                            
+                        </tr>
+
+                        <tr>
+                            <td> <input type="button" name="btn1" id="btn1" value="Submit" onclick="sub()"></td>
+                            <td><input type="reset" name="btn2" id="btn2" value="Reset"></td>
+                        </tr>
+   
+                        
+                    </tbody>
+                </table>
+                <h3 id="show_out"></h3>
+                
+            </form>
+            <h1 id="show_err"></h1>
+            
+    </div>
+</body>
+<script>
+
+    let captcha;
+    var uniquechar;
+    function generate(){
+        document.getElementById('submit').value = '';
+        captcha = document.getElementById('image');
+        uniquechar='';
+        const randomchar = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        for(let i=1; i<5; i++){
+            uniquechar += randomchar.charAt(Math.random()*randomchar.length)
+        }
+        captcha.innerHTML = uniquechar;
+    }
+    var i = 3;
+    function sub(){
+        // console.log('Button is cliked');
+        var email = document.getElementById('email').value;
+        var pass = document.getElementById('pass').value;
+        
+        if(email == 'patyal@gmail.com' && pass == '123'){
+            console.log('Credentials are Valid ');
+            document.getElementById('show_out').innerHTML = 'Credentials are Valid';
+            i=3;
+        }else{
+            console.log('Crendentials are invalid!!!');
+            document.getElementById('show_out').innerHTML = 'Credentials are Invalid!!! and you have left '+i+ ' chances';
+            i = i-1;
+            
+
+        }
+        // console.log(pass);
+        console.log(i);
+        if(i <0){
+            console.log('You are blocked');
+            document.getElementById('form1').remove();
+            document.getElementById('show_err').innerHTML = "Sorry!! You are blocked";
+        }
+
+        var new_val = document.getElementById('submit').value;
+        if(uniquechar == new_val){
+            console.log('Captcha is Match');
+            document.getElementById('key').innerHTML = 'Captcha is Match';
+            
+
+        }else{
+            console.log("Captch is not Match ");
+            document.getElementById('key').innerHTML = 'Captcha is not Match';
+            generate();
+        }
+
+    }
+
+
+    
+
+
+
+</script>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href=
+    "https://use.fontawesome.com/releases/v5.15.3/css/all.css">
+    <style>
+        
+        #user-input{
+            box-shadow: 5px 5px 5px 5px gray;
+            width: auto;
+            margin-right: 10px;
+            padding-bottom: 10px;
+            height: 70px;
+            font-size: 40px;
+            /* border: red 0px solid; */
+        }
+
+        input{
+            border: 1px solid black;
+        }
+
+        .inline{
+            display: inline-block;
+        }
+
+        #image{
+            margin-top: 10px;
+            box-shadow: 5px 5px 5px 5px gray;
+            width: 60px;
+            padding: 20px;
+            font-weight: 400;
+            padding-bottom: 0px;
+            height: 60px;
+            user-select: none;
+            text-decoration: line-through;
+            font-size: italic;
+            border: red 2px solid;
+            margin-left: 10px;
+        }
+
+        #btn{
+            box-shadow: 5px 5px 5px 5px gray;
+            color: aqua;
+            margin: 10px;
+            background-color: brown;
+            border-radius: 5px;
+            border: none;
+            padding: 15px;
+        }
+
+        #submit{
+            font-size: 20px;
+            border-radius: 10px;
+            width: 90%;
+        }
+        #key{
+            color: red;
+        }
+    </style>
+</head>
+<body onload="generate()">
+    <form action="">
+        <div id="user-input" class="inline" >
+            <input type="text" id="submit" placeholder="Captcha code">
+        </div>
+        <div class="inline" onclick="generate()">
+            <i class="fas fa-sync"></i>
+        </div>
+
+        <div id="image" class="inline" selectable = "False">
+
+        </div>
+
+        <input type="button" id="btn" value="Submit" onclick="printmsg()">
+        <p id="key"></p>
+
+    </form>
+</body>
+<script>
+    let captcha;
+    var uniquechar;
+    function generate(){
+        document.getElementById('submit').value = '';
+        captcha = document.getElementById('image');
+        uniquechar='';
+        const randomchar = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        for(let i=1; i<5; i++){
+            uniquechar += randomchar.charAt(Math.random()*randomchar.length)
+        }
+        captcha.innerHTML = uniquechar;
+    }
+
+    function printmsg(){
+        
+        var new_val = document.getElementById('submit').value;
+        if(uniquechar == new_val){
+            console.log('Captcha is Match');
+            document.getElementById('key').innerHTML = 'Captcha is Match';
+            
+
+        }else{
+            console.log("Captch is not Match ");
+            document.getElementById('key').innerHTML = 'Captcha is not Match';
+            generate();
+        }
+
+    }
+
+
+</script>
+</html>

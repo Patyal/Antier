@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+
+
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+
+        h1{
+            color: green;
+            text-align: center;
+        }
+
+        .main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        form{
+            background-color: #f2f2f2;
+            width: 70%;
+            padding: 40px;
+        }
+
+        input[type=text], input[type=email] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+
+        label{
+            color: green;
+        }
+
+        input[type=button]{
+            background-color: #ff5733;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+        .modal-header {
+            border-bottom: none;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-footer {
+            border-top: none;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="main">
+        
+        <form action="" id="my_form">
+            <h1>Play With JSON</h1>
+
+            <label for="emp">Employee</label>
+            <input type="text" id="emp" name="emp">
+
+            <label for="post">Post</label>
+            <input type="text" id="post" name="post">
+
+            <label for="sal">Salary</label>
+            <input type="text" id="sal" name="sal">
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email">
+
+            <input type="button" name="btn_add" value="Add" onclick="fun_add()">
+            <input type="button" name="btn_delete" value="Delete" onclick="fun_delete();">
+            <input type="button" name="btn_find" value="Find" id="btn_find" onclick="fun_find()">
+            <input type="button" name="btn_sort" value="Sort">
+
+
+             <!-- Modal -->
+             <div id="myModal" class="modal fade modal-lg">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modal Title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- <p id="test_cont">This is the modal content. You can add whatever content you want here.</p> -->
+                             <table class="table table-hover modal_table" id="second_table">
+                                <thead>
+                                    <th >S.No</th>
+                                    <th>Employee</th>
+                                    <th >Post</th>
+                                    <th >Salary</th>
+                                    <th >Email</th>
+                                </thead>
+
+                                <tbody>
+
+                                </tbody>
+
+                             </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+        
+    </div>
+
+    <div>
+        <table class="table table-hover new_table" id="first_table">
+            <thead>
+              <tr>
+                <th scope="col">S.NO</th>
+                <th scope="col">Employee</th>
+                <th scope="col">Post</th>
+                <th scope="col">Salary</th>
+                <th scope="col">Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+          </table>
+    </div>
+    
+</body>
+<script>
+
+let my_json = [];
+
+function fun_add() {
+    var size = my_json.length;
+    var data = {
+        'id': size + 1,
+        'emp': emp.value,
+        'post': post.value,
+        'salary': sal.value,
+        'email': email.value
+    }
+    my_json.push(data);
+    
+    updateTable();
+}
+
+function fun_delete() {
+    var data_del = my_json.filter(rec => rec.emp !== emp.value);
+    my_json = data_del;
+    updateTable();
+}
+
+function fun_find() {
+    var data_find = my_json.filter(rec => rec.emp === emp.value);
+    console.log(data_find);
+    const modalbody = document.querySelector('.modal_table tbody');
+    modalbody.innerHTML ='';
+    data_find.forEach((data, index)=>{
+        const mrow = document.createElement('tr');
+        mrow.innerHTML =`
+            <td>${index +1} </td>
+            <td>${data.emp} </td>
+            <td>${data.post}</td>
+            <td>${data.salary}</td>
+            <td>${data.email}</td>`;
+            modalbody.appendChild(mrow);
+    })
+
+    // Get the modal
+    var modal = document.getElementById('myModal');
+    // console.log(modal);
+
+    // Show the modal
+    var myModal = new bootstrap.Modal(modal);
+    myModal.show();
+}
+
+
+
+function updateTable() {
+    document.getElementById("my_form").reset();
+
+    const tableBody = document.querySelector('.new_table tbody');
+    tableBody.innerHTML = '';
+
+    my_json.forEach((data, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${data.emp}</td>
+            <td>${data.post}</td>
+            <td>${data.salary}</td>
+            <td>${data.email}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+// Getting elements by id
+let emp = document.getElementById('emp');
+let post = document.getElementById('post');
+let sal = document.getElementById('sal');
+let email = document.getElementById('email');
+
+</script>
+</html>

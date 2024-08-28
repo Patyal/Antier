@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body{
+            background-color: darkgray;
+        }
+        .parent{
+            background-color: black;
+            margin: auto;
+            width: 30%;
+            padding: 20px;
+            border-radius: 10px;
+        
+        }
+        
+        table{
+            border-collapse: collapse;
+            text-align: center;
+            margin-left: 40px;
+        
+            
+            /* background-color: aqua; */
+        }
+        input{
+            font-size: 25px;
+            padding: 20px;
+            border-radius: 40px;
+            background-color: rgb(183, 193, 193);
+            margin-top: 10px;
+        }
+
+        .colorange>input{
+            background-color: orange;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="parent">
+    
+        <form action="">
+            <table border="1px solid red" id="calcu">
+                <tr>
+                    <td colspan="4"><input type="text" name="result" id="result" placeholder="0"></td>
+                </tr>
+                    
+                <tr>
+                    <td><input type="reset" name="ac" id="ac" value="AC" ></td>
+                    <td><input type="button" name="scientific"  id="scientific" value="+/-"></td>
+                    <td><input type="button" name="percentage" id="percentage" value="%" onclick="percent()"></td>
+                    <td class="colorange"><input type="button" name="divide" id="divide" value="/" onclick="dis('/')"></td>
+                </tr>
+
+                <tr>
+                    <td><input type="button" name="seven" id="seven" value="7"  onkeydown="myfunc(event)" onclick="dis('7')"></td>
+                    <td><input type="button" name="eight" id="eight" value="8" onclick="dis('8')" onkeydown="myfunc(event)"></td>
+                    <td><input type="button" name="nine" id="nine" value="9" onclick="dis('9')" onkeydown="myfunc(event)"></td>
+                    <td class="colorange"><input type="button" name="multiply" id="multiply" value="*" onclick="dis('*')" onkeydown="myfunc(event)"></td>      
+                </tr>
+
+                <tr>
+                    <td><input type="button" name="four" id="four" value="4" onclick="dis('4')" onkeydown="myfunc(event)"></td>
+                    <td><input type="button" name="five" id="five" value="5" onclick="dis('5')" onkeydown="myfunc(event)"></td>
+                    <td><input type="button" name="six" id="six" value="6" onclick="dis('6')" onkeydown="myfunc(event)"></td>
+                    <td class="colorange"><input type="button" name="minus" id="minus" value="-" onclick="dis('-')" onkeydown="myfunc(event)"></td>
+                </tr>
+
+                <tr>
+                    <td><input type="button" name="one" id="one" value="1" onclick="dis('1')" onkeydown="myfunc(event)"></td>
+                    <td><input type="button" name="two" id="one" value="2" onclick="dis('2')" onkeydown="myfunc(event)"></td>
+                    <td><input type="button" name="three" id="one" value="3" onclick="dis('3')" onkeydown="myfunc(event)"></td>
+                    <td class="colorange"><input type="button" name="addition" id="addition" value="+" onclick="dis('+')" onkeydown="myfunc(event)"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2"><input type="button" name="zero" id="zero" value="0" onclick="dis('0')" onkeydown="myfunc(event)"></td>
+                    <td><input type="button" name="decimal" id="decimal" value = "." onclick="dis('.')" onkeydown="myfunc(event)"></td>
+                    <td class="colorange"><input type="button" name="equal" id="equal" value="="onkeydown="myfunc(event)"></td>  
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+<script>
+
+
+    function dis(val){
+        document.getElementById('result').value += val;
+    }
+
+    function myfunc(event){
+
+        // console.log(event);
+        
+        if(event.key == '7' || event.key == '8' || event.key == '9' || event.key == '4' || event.key == '5' || event.key == '6' || event.key == '1' || event.key == '2' || event.key == '3' || event.key == '0' || event.key == '/' || event.key =='*' || event.key=='-' || event.key =='+' || event.key =='='){
+            // console.log('7 th key down');
+            document.getElementById('result').value+= event.key;
+        }
+
+    }
+
+    var cal = document.getElementById("calcu");
+    cal.onkeyup = function (event){
+        let code = event.keyCode;
+        // console.log(code);
+        if(code == 13){
+            console.log('Enter is pressed');
+            let x = document.getElementById("result").value;
+        }
+        
+    }
+    // console.log(which);
+
+</script>
+</html>

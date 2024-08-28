@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form with Validation</title>
+</head>
+<style>
+    *{
+        box-sizing: border-box;
+    }
+
+    input[type=text], input[type=password]{
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        resize: vertical;
+    }
+
+    input[type = button]{
+        background-color: #04AA6D;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        cursor: pointer;
+    }
+
+    input[type=button]:hover {
+            background-color: #45a049;
+    }
+
+    .main{
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            width: 40%;
+            height: 500px;
+            margin: auto;
+            /* margin: auto; */
+        }
+
+    h1{
+        text-align: center;
+        color: green;
+    }
+
+    #nm_error, #age_error, #pass_error{
+        /* margin-bottom: 20px; */
+        color: red;
+    }
+
+    .errors{
+        /* float: left; */
+        margin-top: -25px;
+    }
+    
+    img{
+        width: 8%;
+        height: 8%;
+        display: inline;
+        margin-left: -11.5%;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+
+</style>
+<body>
+    <div class="main">
+    
+    <form action="">
+        <h1>Form WithValidation</h1>
+        <label for="nm">Name</label>
+        <input type="text" id="nm" class="nm" onkeyup="show_name_err(this)">
+        <div class="errors">
+            <p id="nm_error"></p>
+        </div>
+        
+        <label for="age">Age</label>
+        <input type="text" id="age" class="age" onkeyup="show_age_err(this)">
+        <div class="errors">
+            <p id="age_error"></p>
+        </div>
+        
+        <label for="pass">Password</label>
+        <input type="password" id="pass" class="pass" onkeyup="show_pass_err(this)">
+        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20210917145551/eye.png" alt="" onclick="img_show_hide()" id="img_toggle">
+        <div class="errors">
+            <p id="pass_error"></p>
+        </div>
+        
+
+        <input type="button" id="btn1" value="Submit">
+    </form>
+    </div>
+</body>
+<script>
+
+
+    function show_name_err(input){
+        // if(input.id == 'nm'){
+        //     nm_error.textContent = input.value.trim()==''?'Name is required' : "";
+        //     console.log(nm_error);
+        // }else if(input.id == 'age'){
+        //     age_error.textContent = input.value.trim() ==''?'Age is required' : '';
+        // } else if(input.id == 'pass'){
+        //     pass_error.textContent = input.value.trim() ==''?'Password is required': '';
+        // } else {
+        //     console.log('Please select valid field!!');
+        // }
+
+        if(!/^[a-zA-Z]*$/.test(input.value)){
+
+            nm_error.textContent = 'Sorry you are enter wrong input';
+
+        } else{
+            nm_error.textContent = '';
+        }
+        
+    }
+
+    function show_age_err(input){
+            // console.log('age is clicked');
+            if(!/^[0-9]*$/.test(input.value)){
+                age_error.textContent = 'Please enter valid age';
+            } else if(input.value < 18){
+                age_error.textContent = 'Age should be greater then 18';
+
+            } else{
+                age_error.textContent = '';
+            }
+                
+
+    }
+
+    function show_pass_err(input){
+        // console.log('This is password field!!!');
+        if(input.value == ''){
+            pass_error.textContent = 'Password filed is not blanked'
+        }else if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{5,}$/.test(input.value)){
+            pass_error.textContent = 'You must have aplhabet, number and special characters';
+        }else{
+            pass_error.textContent = '';
+        }
+
+    }
+
+    function img_show_hide() {
+        var pass = document.getElementById('pass');
+        var toggle_img = document.getElementById('img_toggle');
+        if(pass.type == 'password'){
+            pass.type = 'text';
+            toggle_img.src = 'https://media.geeksforgeeks.org/wp-content/uploads/20210917150049/eyeslash.png';
+            
+            
+        }else{
+            pass.type = "password";
+            toggle_img.src = 'https://media.geeksforgeeks.org/wp-content/uploads/20210917145551/eye.png';
+            
+        }
+    }
+</script>
+</html>

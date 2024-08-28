@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOOPS</title>
+    <style>
+        #main{
+            display: flex;
+        }
+
+        h2{
+            margin-right: 20px;
+            /* word-spacing: 30px; */
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <h1>Tables 1 to 10</h1>
+        <div id="main">
+            <h2 id="fortableone"></h2>
+            
+        </div>
+    </div>
+    
+</body>
+    <script>
+        var res = [];
+        for(var i=1; i<=10; i++){
+            for(var y=1; y<=10; y++){
+                
+                res += i*y+'<br>';
+                 document.getElementById('fortableone').innerHTML = res;  
+            }
+
+            res +='<br>';
+            
+        }
+
+    </script>
+</html>

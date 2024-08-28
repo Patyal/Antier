@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback Function</title>
+</head>
+<body>
+    <div>
+        <h1 id="res"></h1>
+    </div>
+</body>
+<script>
+    // function show(result){
+    //     document.getElementById('res').innerHTML = result;
+    // }
+
+    // function sum(x,y,show){
+    //     result = x+y;
+    //     show(result);
+    // }
+    // sum(10,7,show);
+
+    // function greet(name, callback){
+    //     document.getElementById('res').innerHTML = 'Hello '+ name;
+    //     callback();
+
+    // }
+
+    // function sayGoodbye(){
+    //     console.log('Goodbye!');
+    // }
+
+    // greet('Sahil', sayGoodbye);
+
+    function fetchData(callback){
+        setTimeout(()=>{
+            callback('Food Menu');
+        },2000);
+    }
+
+    function processData(data){
+        console.log('Process '+ data);
+        console.log('Data Fetch');
+    }
+    console.log('Data start ...');
+    fetchData(processData);
+</script>
+</html>

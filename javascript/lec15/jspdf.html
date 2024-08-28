@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js" integrity="sha512-2/YdOMV+YNpanLCF5MdQwaoFRVbTmrJ4u4EpqS/USXAQNUDgI5uwYi6J98WVtJKcfe1AbgerygzDFToxAlOGEQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+
+    <div>
+        <form action="">
+            <label for="name">Name</label>
+            <input type="text" id="name">
+            
+            <label for="email">Email</label>
+            <input type="text" id="email">
+
+            <label for="city">City</label>
+            <input type="text" id="city">
+
+            <input type="button" id="btnpdf" value="Download PDF">
+        </form>
+    </div>
+    
+</body>
+    <script>
+        document.getElementById("btnpdf").addEventListener('click',()=>{
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var city = document.getElementById('city').value;
+            // console.log(name);
+            const {jsPDF} = window.jspdf;
+            const doc = new jsPDF();
+            console.log(doc);
+            // doc.text(`Name ${name}`,10,10);
+            // doc.text(`Email ${email}`,10,20);
+            // doc.text(`City ${city}`,10,30);
+
+            doc.autoTable({
+                head:[['Field','Value']],
+                body:[['Name',name],['Email', email], ['City', city]]
+            });
+            doc.setLineWidth(1.0);
+            doc.setDrawColor(255,0,0);
+            doc.line(10,80,200,80);
+
+            doc.save('my_data pdf');
+
+        });
+
+    </script>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let data = [
+        {
+            "id" : 1,
+            "name" : "Radhika",
+            "age": 26,
+            "city": "London",
+            "amt": 25000
+
+        },
+        {
+            "id" : 2,
+            "name" : "Mohit",
+            "age": 25,
+            "city": "Delhi",
+            "amt": 12000
+        },
+        {
+            "id" : 3,
+            "name" : "Sonali",
+            "age": 24,
+            "city": "Shimla",
+            'amt': 18000
+        }
+    ];
+
+
+    let new_data = {
+        "id": 4,
+        "name": "Rohit",
+        "age": 30,
+        "city": "J&K",
+        "amt": 8000
+    } 
+
+    let all_data = [...data, new_data];
+    // console.log(all_data);
+
+    let data_sort = data.sort((a,b) => a.age-b.age);
+    // console.log(data_sort);
+    let data_filter = all_data.filter(rec => rec.name === 'Rohit');
+    // console.log(data_filter);
+    let data_del = all_data.filter(rec => rec.name !== 'Sonali');
+    console.log(data_del);
+</script>
+</html>

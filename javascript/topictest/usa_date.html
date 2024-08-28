@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+    var date = new Date();
+    // console.log(date);
+    var getdate = date.getFullYear();
+    var month = date.getMonth()+1;
+    var day = date.getDate();
+
+    if(day < 10){
+
+        day = '0'+day;
+
+    }
+
+    if(month < 10){
+
+        month = '0'+month;
+
+    }
+    
+    var usadateformat = month +'-' + day + '-'+ getdate;
+    console.log(usadateformat); 
+
+
+</script>
+</html>
